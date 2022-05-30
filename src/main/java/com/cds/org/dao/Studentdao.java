@@ -40,4 +40,15 @@ public class Studentdao {
     }
 
 
+    public Student getStudentById(Long id){
+        Session session = getSession();
+        Student student = session.get(Student.class, id);
+
+       // System.out.println(student.getName());
+
+return student;
+
+    }
+
+
 }
