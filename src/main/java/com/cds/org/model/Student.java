@@ -19,9 +19,14 @@ public class Student {
 
     private String lastname;
 
-    @OneToOne
-    @JoinColumn(name = "Vehicle_Id")
-    private Vehicle vehicle;
+    @OneToMany
+    @JoinTable(name = "STUDENT_VEHICLE",
+           joinColumns = @JoinColumn(name="STUDENT_ID"),
+            inverseJoinColumns = @JoinColumn(name="VEHICLE_ID")
+
+    )
+
+    private Collection<Vehicle> vehicle = new ArrayList<>();
 
     public Student() {
     }
@@ -56,11 +61,11 @@ public class Student {
         this.lastname = lastname;
     }
 
-    public Vehicle getVehicle() {
+    public Collection<Vehicle> getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(Vehicle vehicle) {
+    public void setVehicle(Collection<Vehicle> vehicle) {
         this.vehicle = vehicle;
     }
 }

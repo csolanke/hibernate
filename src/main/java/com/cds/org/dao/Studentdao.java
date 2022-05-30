@@ -31,8 +31,16 @@ public class Studentdao {
 
 
     public void  saveStudent(Student student){
-        Vehicle vehicle = student.getVehicle();
-        getSession().save(vehicle);
+        Collection<Vehicle> vehicle = student.getVehicle();
+        List<Vehicle> vehicles = vehicle.stream().toList();
+
+        for (Vehicle vehicle1 : vehicles) {
+            vehicle1.setStudent(student);
+        }
+
+        for (Vehicle vehicle1 : vehicles) {
+            getSession().save(vehicle1);
+        }
         getSession().save(student);
 
 

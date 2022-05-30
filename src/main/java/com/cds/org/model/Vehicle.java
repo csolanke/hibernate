@@ -1,10 +1,7 @@
 package com.cds.org.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Vehicle {
@@ -13,6 +10,9 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int vechicleId;
     private String vehicleName;
+
+    @ManyToOne
+    private Student student;
 
     public Vehicle() {
     }
@@ -31,5 +31,13 @@ public class Vehicle {
 
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
