@@ -19,18 +19,9 @@ public class Student {
 
     private String lastname;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-            @JoinTable(name="student_address",
-                    joinColumns = @JoinColumn(name="student_Id")
-            )
-//            @CollectionId(columns = {@Column(name="address_Id")},generator = "hilo-gen",
-//            type = @Type(type="long"))
-
-    Collection<Address> addressList = new ArrayList<>();
-
-
-
-
+    @OneToOne
+    @JoinColumn(name = "Vehicle_Id")
+    private Vehicle vehicle;
 
     public Student() {
     }
@@ -65,11 +56,11 @@ public class Student {
         this.lastname = lastname;
     }
 
-    public Collection<Address> getAddressList() {
-        return addressList;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setAddressList(Collection<Address> addressList) {
-        this.addressList = addressList;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }

@@ -3,6 +3,7 @@ package com.cds.org.dao;
 
 import com.cds.org.model.Address;
 import com.cds.org.model.Student;
+import com.cds.org.model.Vehicle;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class Studentdao {
 
 
     public void  saveStudent(Student student){
-
+        Vehicle vehicle = student.getVehicle();
+        getSession().save(vehicle);
         getSession().save(student);
 
 
@@ -45,11 +47,10 @@ public class Studentdao {
     public Student getStudentById(Long id){
         Session session = getSession();
         Student student = session.get(Student.class, id);
-        student.getAddressList();
 
         // System.out.println(student.getName());
 
-return student;
+      return student;
 
     }
 
