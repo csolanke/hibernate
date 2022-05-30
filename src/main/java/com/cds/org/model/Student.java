@@ -19,12 +19,13 @@ public class Student {
 
     private String lastname;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
             @JoinTable(name="student_address",
                     joinColumns = @JoinColumn(name="student_Id")
             )
 //            @CollectionId(columns = {@Column(name="address_Id")},generator = "hilo-gen",
 //            type = @Type(type="long"))
+
     Collection<Address> addressList = new ArrayList<>();
 
 
