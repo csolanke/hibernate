@@ -32,4 +32,9 @@ public class StudentController {
         return studentdao.getStudents();
 
     }
+
+    @GetMapping("student/{id}")
+    public  Student getStudentByID(@PathVariable Long id){
+        return studentdao.getStudentById(id);
+    }
 }
