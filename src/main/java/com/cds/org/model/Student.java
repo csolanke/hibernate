@@ -1,10 +1,10 @@
 package com.cds.org.model;
 
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name ="students")
@@ -20,7 +20,12 @@ public class Student {
     private String lastname;
 
     @ElementCollection
-    List<Address> addressList = new ArrayList<>();
+            @JoinTable(name="student_address",
+                    joinColumns = @JoinColumn(name="student_Id")
+            )
+//            @CollectionId(columns = {@Column(name="address_Id")},generator = "hilo-gen",
+//            type = @Type(type="long"))
+    Collection<Address> addressList = new ArrayList<>();
 
 
 
@@ -59,11 +64,11 @@ public class Student {
         this.lastname = lastname;
     }
 
-    public List<Address> getAddressList() {
+    public Collection<Address> getAddressList() {
         return addressList;
     }
 
-    public void setAddressList(List<Address> addressList) {
+    public void setAddressList(Collection<Address> addressList) {
         this.addressList = addressList;
     }
 }
