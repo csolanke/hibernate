@@ -1,6 +1,10 @@
 package com.cds.org.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name ="students")
@@ -15,28 +19,9 @@ public class Student {
 
     private String lastname;
 
-    @Embedded
-   @AttributeOverrides({@AttributeOverride(
-           name = "street",
-           column = @Column(name = "home_street_name")
-   ),
-           @AttributeOverride(
-                   name = "state",
-                   column = @Column(name = "home_state_name")
-           ),
-           @AttributeOverride(
-                   name = "city",
-                   column = @Column(name = "home_city_name")
-           ),
-           @AttributeOverride(
-                   name = "pincode",
-                   column = @Column(name = "home_zipcode")
-           )
-   } )
-    private Address homeAddress;
+    @ElementCollection
+    List<Address> addressList = new ArrayList<>();
 
-    @Embedded
-    private Address officeAddress;
 
 
 
@@ -74,19 +59,11 @@ public class Student {
         this.lastname = lastname;
     }
 
-    public Address getHomeAddress() {
-        return homeAddress;
+    public List<Address> getAddressList() {
+        return addressList;
     }
 
-    public void setHomeAddress(Address homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public Address getOfficeAddress() {
-        return officeAddress;
-    }
-
-    public void setOfficeAddress(Address officeAddress) {
-        this.officeAddress = officeAddress;
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
     }
 }
